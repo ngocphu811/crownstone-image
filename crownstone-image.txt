@@ -45,5 +45,15 @@ addgroup ubuntu sudo
 mkdir /home/ubuntu/crownstone
 echo "export BLUENET_DIR=/home/ubuntu/crownstone" >> /home/ubuntu/.bashrc
 
+### scripts and docs ###
+bluenet-get.sh
+extract-and-fix-nordic-sdk.sh
+manual.txt (link to online manual)
+manual.pdf (pdf of the online manual)
+
+### download, extract and fix nordic sdk ###
+see extract-and-fix-nordic-sdk.sh
+
+
 
 
