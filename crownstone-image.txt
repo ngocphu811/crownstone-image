@@ -1,0 +1,49 @@
+### build essentials ###
+apt-get update
+apt-get install cmake minicom git
+
+### 32 bits libs ###
+dpkg --add-architecture i386
+apt-get update
+apt-get install libstdc++6:i386 libncurses5:i386
+
+
+### arm compiler ###
+mkdir opt/compiler
+cd opt/compiler
+wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
+tar xjf gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
+rm gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
+
+### jlink ###
+cd /root
+Download: https://www.segger.com/jlink-software.html?step=1&file=JLinkLinuxDEB64_4.96.2
+dpkg -i jlink_4.96.2_x86_64.deb
+
+### openocd ###
+cd /opt
+git clone https://github.com/ntfreak/openocd
+apt-get install libtool automake libusb-1.0-0-dev srecord expect
+cd openocd
+./bootstrap 
+./configure --enable-stlink
+make
+sudo make install
+cp ~/bluenet/scripts/openocd/49-stlinkv2.rules /etc/udev/rules.d
+
+### python tools ###
+sudo apt-get install python-pygame python-pip
+sudo pip install pexpect
+sudo pip install intelhex --allow-unverified intelhex
+
+### default user ###
+adduser ubuntu
+addgroup ubuntu dialout
+addgroup ubuntu sudo
+
+### bluenet_dir ###
+mkdir /home/ubuntu/crownstone
+echo "export BLUENET_DIR=/home/ubuntu/crownstone" >> /home/ubuntu/.bashrc
+
+
+
