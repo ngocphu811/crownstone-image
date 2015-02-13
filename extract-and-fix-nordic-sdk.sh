@@ -2,6 +2,7 @@
 
 SDK_DIR=/opt/nrf51_sdk/v6
 SD_DIR=/opt/softdevices
+DOWNLOAD_DIR=~/Downloads
 
 SDK_FILE="nrf51_sdk_v6_1_0_b2ec2e6.zip"
 S110_FILE="s110_nrf51822_7.0.0.zip"
@@ -12,17 +13,17 @@ if [ "$EUID" -ne 0 ]; then
 	exit 1
 fi
 
-if [ ! -e ~/Downloads/${SDK_FILE} ]; then
+if [ ! -e ${DOWNLOAD_DIR}/${SDK_FILE} ]; then
 	echo "Please download '${SDK_FILE}' and place it in the dir: ~/Downloads"
 	exit 1
 fi
 
-if [ ! -e ~/Downloads/${S110_FILE} ]; then
+if [ ! -e ${DOWNLOAD_DIR}/${S110_FILE} ]; then
 	echo "Please download '${S110_FILE}' and place it in the dir: ~/Downloads"
 	exit 1
 fi
 
-if [ ! -e ~/Downloads/${S130_FILE} ]; then
+if [ ! -e ${DOWNLOAD_DIR}/${S130_FILE} ]; then
 	echo "Please download '${S130_FILE}' and place it in the dir: ~/Downloads"
 	exit 1
 fi
@@ -31,7 +32,7 @@ fi
 # Unzip
 mkdir -p $SDK_DIR
 cd $SDK_DIR
-cp ~/Downloads/${SDK_FILE} .
+cp ${DOWNLOAD_DIR}/${SDK_FILE} .
 unzip -oq ${SDK_FILE}
 
 # Fix bug
@@ -45,9 +46,9 @@ done
 # Unzip softdevices
 mkdir -p $SD_DIR
 cd $SD_DIR
-cp ~/Downloads/${S110_FILE} .
+cp ${DOWNLOAD_DIR}/${S110_FILE} .
 unzip -oq ${S110_FILE}
-cp ~/Downloads/${S130_FILE} .
+cp ${DOWNLOAD_DIR}/${S130_FILE} .
 unzip -oq ${S130_FILE}
 
 # Fix bug
@@ -57,4 +58,7 @@ for f in $( find . -name nrf_svc.h ); do
 	sed -i -re 's/"bx r14" : : "I" \(number\)/"bx r14" : : "I" \(\(uint16_t\)number\)/g' $f
 done
 
+echo ""
+echo "Extracted nrf51 SDK to: $SDK_DIR"
+echo "Extracted softdevices to: $SD_DIR"
 echo "Done!"

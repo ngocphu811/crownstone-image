@@ -15,6 +15,7 @@ result=$?
 if [ $result -ne 0 ]; then
 	echo "ERROR: Could not clone https://github.com/${1}/bluenet"
 	echo "Make sure you filled in the correct username and that you are connected to the internet."
+	echo "Also make sure you forked the repository: https://github.com/dobots/bluenet/fork"
 	exit 1
 fi
 
@@ -47,7 +48,4 @@ if [ $result -ne 0 ]; then
 fi
 
 echo "Done!"
-
-
-# Currently edit:
-#SERIAL_VERBOSITY ?
+echo "Now edit ${BLUENET_DIR}/CMakeBuild.config"
