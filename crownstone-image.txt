@@ -15,7 +15,7 @@ wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc
 tar xjf gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
 rm gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
 
-### jlink ###
+### J-link -- can't distribute: has a licence! ###
 cd /root
 Download: https://www.segger.com/jlink-software.html?step=1&file=JLinkLinuxDEB64_4.96.2
 dpkg -i jlink_4.96.2_x86_64.deb
@@ -53,6 +53,55 @@ manual.pdf (pdf of the online manual)
 
 ### download, extract and fix nordic sdk ###
 see extract-and-fix-nordic-sdk.sh
+
+
+
+### android app ###
+Install dependencies:
+	dpkg --add-architecture i386
+	apt-get update
+	apt-get install libncurses5:i386 libstdc++6:i386 zlib1g:i386
+	
+	apt-get install ant
+	apt-get install openjdk-7-jdk
+	(or apt-get install sun-java6-jdk)
+
+
+Get the android SDK
+	Download the Linux version of "SDK tools only" from http://developer.android.com/sdk/index.html#Other
+
+	cd ~/android-sdk-linux/tools
+	Open up the Android SDK manager
+		./android sdk
+	Cordova currently uses api 19
+		Also select "Android 4.4.2 API 19"
+		Click "Install .. packages.."
+		Click "Accept licence" and then "Install"
+	TODO: http://stackoverflow.com/questions/17963508/how-to-install-android-sdk-build-tools-on-the-command-line
+
+	
+Add the android SDK to your PATH:
+	echo "export PATH=${PATH}:~/android-sdk-linux/platform-tools:~/android-sdk-linux/tools" >> /home/ubuntu/.bashrc
+And cordova uses this environment variable:
+	echo "ANDROID_HOME=~/android-sdk-linux" >> /home/ubuntu/.bashrc
+
+Get node.js:
+	or: apt-get install nodejs npm
+	or: https://gist.github.com/isaacs/579814
+	or: http://nodejs.org/
+	Might have to:
+	ln -s /usr/bin/nodejs /usr/bin/node
+
+Get cordova (see https://cordova.apache.org/docs/en/3.4.0/guide_cli_index.md.html#The%20Command-Line%20Interface)
+	npm install -g cordova
+
+Build the app
+	cd ~/crownstone-app
+	cordova platform add android
+	cd scripts
+	./fix-name.sh
+	./android.sh build
+	
 
 
 
