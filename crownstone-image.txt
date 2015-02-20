@@ -1,3 +1,12 @@
+See:
+	https://help.ubuntu.com/community/LiveCDCustomization
+	http://releases.ubuntu.com/14.04.1/
+	http://askubuntu.com/questions/83617/can-i-build-a-ubuntu-iso-from-a-manifest
+
+
+
+Installed:
+
 ### build essentials ###
 apt-get update
 apt-get install cmake minicom git
