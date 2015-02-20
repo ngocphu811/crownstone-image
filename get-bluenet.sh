@@ -22,12 +22,12 @@ fi
 cd bluenet
 git remote add upstream https://github.com/dobots/bluenet
 #git branch -u upstream/master
-if [ ! -d ${BLUENET_DIR} ]; then
+if [ ! -d ${BLUENET_CONFIG_DIR} ]; then
 	path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	BLUENET_DIR=${path}/..
-	echo "BLUENET_DIR does not exist. Use ${path}/.. as default"
+	BLUENET_CONFIG_DIR=${path}/..
+	echo "BLUENET_CONFIG_DIR does not exist. Use ${path}/.. as default"
 fi
-cp CMakeBuild.config.default ${BLUENET_DIR}/CMakeBuild.config
+cp CMakeBuild.config.default ${BLUENET_CONFIG_DIR}/CMakeBuild.config
 
 
 cd ..
@@ -48,4 +48,4 @@ if [ $result -ne 0 ]; then
 fi
 
 echo "Done!"
-echo "Now edit ${BLUENET_DIR}/CMakeBuild.config"
+echo "Now edit ${BLUENET_CONFIG_DIR}/CMakeBuild.config"
